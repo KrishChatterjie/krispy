@@ -5,30 +5,33 @@ const {prefix} = require('./config.json');
 
 const client = new Discord.Client();
 
-const TOKEN = process.env.TOKEN;
+const TOKEN = "Nzk4NjAxNDA1MjkxNDI5OTUw.X_3ZhA.7QVcC_VHuq9LqEWJPNPlIDRjTmc";
 
 client.on('message', message => {
-	if (message.content.startsWith(`${prefix}assign`)) {
-		message.channel.send('Assigned task.');
-	}
-	else if (message.content.startsWith(`${prefix}show`)) {
-		message.channel.send('Show task.');
-		//history
-	}
-	else if (message.content.startsWith(`${prefix}done`)) {
-		message.channel.send('Task completed.');
-	}
-	else if (message.content.startsWith(`${prefix}progress`)) {
-		message.channel.send('Task being done.');
-	}
-	else if (message.content === `${prefix}server`) {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-	}
-	else if (message.content === `${prefix}user-info`) {
-		message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
-    }
-    // useless change
-    
+
+    if (message.content.startsWith(`${prefix}`)) {
+		
+        if (message.content.startsWith(`${prefix}assign`)) {
+            message.channel.send('Assigned task.');
+        }
+        else if (message.content.startsWith(`${prefix}show`)) {
+            message.channel.send('Show task.');
+            //history
+        }
+        else if (message.content.startsWith(`${prefix}done`)) {
+            message.channel.send('Task completed.');
+        }
+        else if (message.content.startsWith(`${prefix}progress`)) {
+            message.channel.send('Task being done.');
+        }
+        else if (message.content === `${prefix}server`) {
+            message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+        }
+        else if (message.content === `${prefix}user-info`) {
+            message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+        }
+       
+	}    
 });
 
 client.login(TOKEN);
