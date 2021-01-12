@@ -5,7 +5,9 @@ const {prefix} = require('./config.json');
 
 const client = new Discord.Client();
 
-const TOKEN = "Nzk4NjAxNDA1MjkxNDI5OTUw.X_3ZhA.7QVcC_VHuq9LqEWJPNPlIDRjTmc";
+let TOKEN = "#Nzk4NjAxNDA1MjkxNDI5OTUw.X_3ZhA.tDMJ_7PPCAi_M2qTwIDqbX6dm6o#";
+
+TOKEN = TOKEN.slice(1, TOKEN.length-1);
 
 client.on('message', message => {
 
