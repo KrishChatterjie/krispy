@@ -1,13 +1,9 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 
-const {prefix} = require('./config.json');
+const {prefix, TOKEN} = require('./config.json');
 
 const client = new Discord.Client();
-
-let TOKEN = "#Nzk4NjAxNDA1MjkxNDI5OTUw.X_3ZhA.tDMJ_7PPCAi_M2qTwIDqbX6dm6o#";
-
-TOKEN = TOKEN.slice(1, TOKEN.length-1);
 
 client.on('message', message => {
 
