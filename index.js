@@ -1,9 +1,11 @@
+require('dotenv').config();
 const Discord = require('discord.js');
 
-const { prefix, token } = require('./config.json');
+const {prefix} = require('./config.json');
 
 const client = new Discord.Client();
 
+const TOKEN = process.env.TOKEN;
 
 client.on('message', message => {
 	if (message.content.startsWith(`${prefix}assign`)) {
@@ -29,7 +31,7 @@ client.on('message', message => {
     
 });
 
-client.login(token);
+client.login(TOKEN);
 
 client.once('ready', readyDiscord);
 
