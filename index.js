@@ -6,11 +6,18 @@ const client = new Discord.Client();
 
 
 client.on('message', message => {
-	if (message.content.startsWith(`${prefix}ping`)) {
-		message.channel.send('Pong.');
+	if (message.content.startsWith(`${prefix}assign`)) {
+		message.channel.send('Assigned task.');
 	}
-	else if (message.content.startsWith(`${prefix}beep`)) {
-		message.channel.send('Boop.');
+	else if (message.content.startsWith(`${prefix}show`)) {
+		message.channel.send('Show task.');
+		//history
+	}
+	else if (message.content.startsWith(`${prefix}done`)) {
+		message.channel.send('Task completed.');
+	}
+	else if (message.content.startsWith(`${prefix}progress`)) {
+		message.channel.send('Task being done.');
 	}
 	else if (message.content === `${prefix}server`) {
 		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
