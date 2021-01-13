@@ -16,18 +16,33 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-client.on('guildCreate', data_recieved => {
-	console.log(data_recieved.members);
+client.on('guildCreate', guild => {
+	console.log(guild.id);
+	console.log(guild.name);
 })
 
 client.on('message', message => {
 
+	// console.log(message.guild.roles);
 	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
 		return;
 
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
 	
+	let rolemap = message.guild.roles.cache
+            .sort((a, b) => b.position - a.position)
+            .map(r => `${r.id},${r.name}`);
+            if (rolemap.length > 1024) rolemap = "To many roles to display";
+            if (!rolemap) rolemap = "No roles";
+	// console.log(rolemap);
+	let roles = new Array();
+	let role_id = 0;
+	let role_name = '';
+	for (const role of rolemap) {
+		role.push()
+	}
+
 	// Getting data
 	if (message.mentions.roles.size){
 		const Role = message.mentions.roles.first();
