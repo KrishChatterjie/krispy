@@ -12,10 +12,9 @@ The main entry point:
 
 - task_id, task_name, assigned_by(fk on user), assigned_to(fk on user), task_status
 
-- server_id, roles_id
+- server_id, roles_id, roles_name
 
-- roles_id, roles_name
-
+- user_id, roles_id (many to many relationship)
 
 ## Main stuff
 -   listens for text with the prefix, if prefix then passes the message to a function
