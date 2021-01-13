@@ -23,6 +23,20 @@ client.on('message', message => {
 
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
+	
+	// Getting data
+	if (message.mentions.roles.size){
+		const Role = message.mentions.roles.first();
+		let arr = new Array();
+		Role.members.forEach(user => {
+			arr.push(user.user.username);
+		});
+
+		message.channel.send(arr.join(' | '));
+	}
+	if (message.mentions.users.size){
+		console.log(message.mentions.users.first());
+	}
 
 	if (command == 'assign') {
 		client.commands.get('assign').execute(message, args);
