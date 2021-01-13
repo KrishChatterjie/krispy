@@ -18,13 +18,14 @@ for (const file of commandFiles) {
 
 client.on('message', message => {
 
-	if (!message.content.startsWith(prefix) || message.author.bot) return; 
+	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
+		return;
 
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
 
 	if (command == 'assign') {
-		message.channel.send('Assigned task.');
+		client.commands.get('assign').execute(message, args);
 	}
 	else if (command == 'show') {
 		message.channel.send('Show task.');
