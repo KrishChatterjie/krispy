@@ -39,9 +39,9 @@ client.on('message', message => {
 	let roles = new Array();
 	let role_id = 0;
 	let role_name = '';
-	for (const role of rolemap) {
-		role.push()
-	}
+	// for (const role of rolemap) {
+	// 	break;
+	// }
 
 	// Getting data
 	if (message.mentions.roles.size){
@@ -62,6 +62,9 @@ client.on('message', message => {
 	}
 	else if (command === 'assign') {
 		client.commands.get('assign').execute(message, args);
+	}
+	else if (command === 'help') {
+		client.commands.get('help').execute(message, args);
 	}
 	else if (command === 'show') {
 		message.channel.send('Show task.');
