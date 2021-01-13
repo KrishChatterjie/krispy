@@ -1,80 +1,95 @@
 require('dotenv').config();
+
 const fs = require('fs');
+
 const Discord = require('discord.js');
 
 const { prefix } = require('./config.json');
+const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 
 const client = new Discord.Client();
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
 
+for (const file of commandFiles) {
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
+	
+	const command = require(`./commands/${file}`);
+
 	client.commands.set(command.name, command);
 }
 
 client.on('guildCreate', guild => {
+	
 	console.log(guild.id);
 	console.log(guild.name);
+
+
 })
 
 client.on('message', message => {
-
-	// console.log(message.guild.roles);
+	
 	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
-		return;
-
+	return;
+	
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
 	
 	let rolemap = message.guild.roles.cache
-            .sort((a, b) => b.position - a.position)
-            .map(r => `${r.id},${r.name}`);
-            if (rolemap.length > 1024) rolemap = "To many roles to display";
-            if (!rolemap) rolemap = "No roles";
-	// console.log(rolemap);
+	.sort((a, b) => b.position - a.position)
+	.map(r => `${r.id},${r.name}`);
+	if (rolemap.length > 1024) rolemap = "To many roles to display";
+	if (!rolemap) rolemap = "No roles";
+	
 	let roles = new Array();
-	let role_id = 0;
-	let role_name = '';
-	// for (const role of rolemap) {
-	// 	break;
+	for (const role of rolemap) {
+		let roleData = role.split(',');
+		roles.push([roleData[0], roleData[1]]);
+	}
+	// roles -> a 2d array with role names and corresponding ids
+	
+	
+	
+	//------------------------------------------Working space------------------------------------------------------------------------
+	
+	console.log(message.guild.roles.fetch());
+  
+
+
+	// let role_users  = new Array();
+
+
+	// for (const role of roles) {
+	// 	id = role[0];
+	// 	console.log(message.guild.roles.fetch(id).members);
 	// }
 
-	// Getting data
-	if (message.mentions.roles.size){
-		const Role = message.mentions.roles.first();
-		let arr = new Array();
-		Role.members.forEach(user => {
-			arr.push(user.user.username);
-		});
 
-		message.channel.send(arr.join(' | '));
-	}
-	if (message.mentions.users.size){
-		console.log(message.mentions.users.first());
-	}
 
-	if (command === 'ping') {
+
+
+
+	//-----------------------------------------------------------------------------------------------------------------------------------
+	if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
 		client.commands.get('ping').execute(message, args);
 	}
-	else if (command === 'assign') {
-		client.commands.get('assign').execute(message, args);
-	}
-	else if (command === 'help') {
+	else if (command === 'help'||command === 'commands') {
 		client.commands.get('help').execute(message, args);
 	}
-	else if (command === 'show') {
-		message.channel.send('Show task.');
-		//history
+	else if (command === 'assign'||command === 'give'||command === 'givetask'||command ===  'assigntask') {
+		client.commands.get('assign').execute(message, args);
 	}
-	else if (command === 'done') {
-		message.channel.send('Task completed.');
+	else if (command === 'show'||command ==='showtask'||command === 'display'||command === 'displaytask') {
+		client.commands.get('show').execute(message, args);
 	}
-	else if (command === 'progress') {
-		message.channel.send('Task being done.');
+	else if (command === 'done'||command=== 'donetask'||command ==='finished'||command ==='finishedtask') {
+		client.commands.get('done').execute(message, args);
+	}
+	else if (command === 'progress'||command === 'taskprogress') {
+		client.commands.get('progress').execute(message, args);
 	}
 	else if (command === 'server') {
 		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
@@ -91,4 +106,5 @@ client.once('ready', readyDiscord);
 
 function readyDiscord() {
 	console.log('Logged in');	
+	
 }
