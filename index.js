@@ -41,6 +41,10 @@ client.on('message', message => {
 	if (command == 'assign') {
 		client.commands.get('assign').execute(message, args);
 	}
+	else if (command === 'ping') {
+		client.commands.get('ping').execute(message, args);
+		
+	}
 	else if (command == 'show') {
 		message.channel.send('Show task.');
 		//history

@@ -16,11 +16,29 @@ The main entry point:
 
 - roles_id, roles_name
 
+
+## Main stuff
+-   listens for text with the prefix, if prefix then passes the message to a function
+-   List of functions/files/folders/ (hierarchy of the project)
+-       index.js -> main entry point 
+-           It has ...
+-           It sends commands to its respective *.js file which is in the commands folder
+-       commands folder
+-           ping.js
+-           assign.js
+-           show.js
+-           history.js
+-           progress.js
+
 ## List of commands:
+- ping
+-   what it does:
+-       it replies to 'ping' with 'pong'.
 - assign
 -   params: role/user, task name
 -   notes: 
 -   how it does:
+-       
 -       checks message.mentions
 -       the remaining part is parsed as a single string which will be the task name
 -       
@@ -29,8 +47,9 @@ The main entry point:
 -   constrains: can't assign two tasks with the same name to the same user
 -   example: assign @Krish work 
 -   exceptions:
--       if task name is not given
--       if role user is not mentioned
+-       if task name is not given   -> throws an error
+-       if role user is not mentioned -> defaults to everyone in the server
+
 -       
 -       
 -   backend stuff:
