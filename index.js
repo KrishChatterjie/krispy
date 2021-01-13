@@ -16,6 +16,10 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+client.on('guildCreate', data_recieved => {
+	console.log(data_recieved.members);
+})
+
 client.on('message', message => {
 
 	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
@@ -68,5 +72,5 @@ client.login(process.env.TOKEN);
 client.once('ready', readyDiscord);
 
 function readyDiscord() {
-	console.log('Logged in');
+	console.log('Logged in');	
 }
