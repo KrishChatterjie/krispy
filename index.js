@@ -38,20 +38,21 @@ client.on('message', message => {
 		console.log(message.mentions.users.first());
 	}
 
-	if (command === 'assign') {
-		client.commands.get('assign').execute(message, args);
-	}
-	else if (command === 'ping') {
+	if (command === 'ping') {
 		client.commands.get('ping').execute(message, args);
 	}
+	else if (command === 'assign') {
+		client.commands.get('assign').execute(message, args);
+	}
 	else if (command === 'show') {
-		client.commands.get('show').execute(message, args);
+		message.channel.send('Show task.');
+		//history
 	}
 	else if (command === 'done') {
-		client.commands.get('done').execute(message, args);
+		message.channel.send('Task completed.');
 	}
 	else if (command === 'progress') {
-		client.commands.get('progress').execute(message, args);
+		message.channel.send('Task being done.');
 	}
 	else if (command === 'server') {
 		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
