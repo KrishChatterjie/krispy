@@ -4,7 +4,7 @@ module.exports = {
 	usage: "[task name]",
 	description: 'Completes the task',
 	execute(message, args) {
-        // message.channel.send(args);
 		message.channel.send('Done... but what?');
+		var user = message.author; //this stores the author's ID (Ig y'all need that... ryt?)
 	},
 };

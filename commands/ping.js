@@ -4,7 +4,6 @@ module.exports = {
 	aliases: ["check", "online","checkonline"],
     usage: "",
 	execute(message, args) {
-        // message.channel.send(args);
-		message.channel.send('Pong');
+		message.channel.send('Pong! I\'m here!!');
 	},
 };
