@@ -6,6 +6,7 @@ const Discord = require('discord.js');
 
 const { prefix } = require('./config.json');
 const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
+const { Console } = require('console');
 
 const client = new Discord.Client();
 
@@ -18,7 +19,6 @@ for (const file of commandFiles) {
 	// with the key as the command name and the value as the exported module
 	
 	const command = require(`./commands/${file}`);
-
 	client.commands.set(command.name, command);
 }
 
@@ -26,7 +26,6 @@ client.on('guildCreate', guild => {
 	
 	console.log(guild.id);
 	console.log(guild.name);
-
 
 })
 
@@ -55,7 +54,7 @@ client.on('message', message => {
 	
 	//------------------------------------------Working space------------------------------------------------------------------------
 	
-	console.log(message.guild.roles.fetch());
+	// 							console.log(message.guild.roles.fetch());
   
 
 
@@ -68,9 +67,23 @@ client.on('message', message => {
 	// }
 
 
+	// console.log(message.guild.members.fetch().then(members => console.log(members)));
+	
+	console.log(message.member);
+
+	// message.guild.fetch().then(g => {
+	// 	g.members.fetch().then(m => {
+	// 		console.log(m.user.roles.cache);
+	// 		});
+	// 	});
+
+    const Members = message.guild.members.cache.map(member => `<@`+ member.user+`> `);
+    message.channel.send(`XO ${Members}`);
 
 
-
+	
+	// console.log(message.guild.members.fetch());
+	// console.log(message.guild.members);
 
 	//-----------------------------------------------------------------------------------------------------------------------------------
 	if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
