@@ -5,13 +5,9 @@ module.exports = {
 	description: "Assigns task to role/user",
 	execute(message, args) {
 		if (message.mentions.users.first() != null) {
-			message.channel.send(
-				`Assigned task to <@` + message.mentions.users.first() + `>`
-			);
-
 			message.mentions.users
 				.first()
-				.send(args.join(" ") + `\n\nAssigned by: @` + message.author.tag, {
+				.send(args.join(" ") + `\n\n__**Assigned by:**__ @` + message.author.tag, {
 					split: true,
 				})
 				.then(() => {
@@ -23,6 +19,5 @@ module.exports = {
 		} else {
 			message.channel.send("Tell me who to assign it to, you idiot :)");
 		}
-
 	},
 };
