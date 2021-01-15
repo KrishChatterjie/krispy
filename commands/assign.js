@@ -72,7 +72,7 @@ module.exports = {
 				code: 500
 			  };
 			}
-
+		}
 
 		message.mentions.users.map(user => {
 
@@ -89,5 +89,4 @@ module.exports = {
 		})
 
 	}
-}
 }
