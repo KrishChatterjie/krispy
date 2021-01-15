@@ -66,8 +66,16 @@ client.on('message', message => {
 	// 	console.log(message.guild.roles.fetch(id).members);
 	// }
 
-
-	console.log(message.guild.members.fetch().then(members => console.log(members.map(member => member.user.username))));
+	let x = new Array();
+	message.guild.members.fetch().then(members => {
+		members.map(member => {
+			// x.push([member.user.username, member.user.id]);
+			x.push([member.user.username, member.user.id]);
+		});
+		console.log(x, 'inside');
+		console.log('----');
+	});
+	console.log(x, 'outside');
 	
 	// console.log(message.member);
 
