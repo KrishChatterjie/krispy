@@ -29,6 +29,11 @@ client.on('guildCreate', guild => {
 
 });
 
+// On adding new member
+client.on("guildMemberAdd" ,(message, member) => {
+    message.channel.send("Welcome")
+});
+
 // On message
 client.on('message', async message => {
 	
