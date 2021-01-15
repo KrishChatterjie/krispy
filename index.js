@@ -67,9 +67,9 @@ client.on('message', message => {
 	// }
 
 
-	// console.log(message.guild.members.fetch().then(members => console.log(members)));
+	console.log(message.guild.members.fetch().then(members => console.log(members.map(member => member.user.username))));
 	
-	console.log(message.member);
+	// console.log(message.member);
 
 	// message.guild.fetch().then(g => {
 	// 	g.members.fetch().then(m => {
@@ -77,8 +77,8 @@ client.on('message', message => {
 	// 		});
 	// 	});
 
-    const Members = message.guild.members.cache.map(member => `<@`+ member.user+`> `);
-    message.channel.send(`XO ${Members}`);
+    // const Members = message.guild.members.cache.map(member => `<@`+ member.user+`> `);
+    // message.channel.send(`XO ${Members}`);
 
 
 	
