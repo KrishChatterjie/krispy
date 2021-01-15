@@ -4,8 +4,17 @@ module.exports = {
 	usage: "@role/@user [task name]",
 	description: "Assigns task to role/user",
 	execute(message, args) {
+		
+
+		// if role is mentioned, get a list of all users with that role from the database store it as an array
+		// the elements in the array will be converted to the users object
+		// if user is mentioned after that, append that user to the existing array we get from db
+		// repeat the code below for all the users
+		
+		
 
 		let users = message.mentions.users;
+
 		let assignees_id = new Array();
 		for (const user of users) {
 			let user_copy = user.slice();
