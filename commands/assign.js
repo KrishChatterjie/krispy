@@ -1,3 +1,10 @@
+const relations= require('../models/relations');
+const server = require('../models/server');
+const task= require('../models/task');
+const user = require('../models/user');
+const uuid4 = require('uuid4');
+
+
 module.exports = {
 	name: "assign",
 	aliases: ["give", "givetask", "assigntask"],
@@ -41,11 +48,41 @@ module.exports = {
 		// console.log(assignerId);
 		// console.log("-----------------");
 		// console.log(taskName);
+		static async addtask (assignees_id,assignerId, taskName) {
+			try {
+			  const exist = await User.findOne({ where: { discordId: assignees_id } });
+			  if (!exist) {
+				return {
+				  error: true,
+				  message: 'No such user found',
+				  code: 404
+				};
+			  }
+			  const taskk = {
+				taskId: uuid4(),
+				taskname: taskName,
+				assignee: exist.userId,
+				assigner: assignerId
+			  };
+			  const newTask = await task.create(taskk);
+			  return {
+				error: false,
+				message: 'Task Successfully Created',
+				code: 201,
+				task: newTask
+			  };
+			} catch (err) {
+			  return {
+				error: true,
+				message: 'An Error Occurred' + err,
+				code: 500
+			  };
+			}
 
 
 		message.mentions.users.map(user => {
 
-			user.send(`**Task:** ` +taskName + `\n**Assigned by:** <@` + message.author+`>`, {
+			user.send(`**Task:**` +taskName + `\n**Assigned by:** <@` + message.author+`>`, {
 				split: true,
 			})
 			.then(() => {
@@ -59,3 +96,4 @@ module.exports = {
 
 	},
 };
+©
