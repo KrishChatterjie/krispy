@@ -78,7 +78,9 @@ client.on('message', message => {
 
 		case 'update':
 		case 'refresh':
-			getInfo.getUsers(message.guild, message.mentions.roles.first());
+			// getInfo.getUsers(message.guild, message.mentions.roles.first());
+			// console.log(getInfo.getUsers(message.guild, message.mentions.roles.first()));
+			console.log(message.content);
 			break;
 
 		case 'remove':
