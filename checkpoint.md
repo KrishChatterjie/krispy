@@ -40,5 +40,7 @@
 - create a new file to fetch roles/users and ctrl-c, ctrl-v
 - call ^ file from index.js, assign.js, progress.js, remove.js 
 
+- update database when new user is added to or leaves server
+
 - work on readme after everything else is done
 

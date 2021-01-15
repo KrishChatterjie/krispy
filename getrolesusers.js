@@ -108,16 +108,17 @@
 //     }
 //  }
 
-const getUsers = (guild, role) => {
+async function getUsers (guild, role) {
     //if role or user no mentioned in message, role = @everyone
     // all 
-    role_id = role.id;
+    // return await pranjal(guild, role);
+    let usersReqd = new Array();
     let users = new Array();
-    guild.members.fetch().then(members => {
-        members.map(member => {
+    role_id = role.id;
+    let members = await guild.members.fetch();
+    members.map(member => {
             users.push([member.user.id, member.user.username]);
         });
-        let usersReqd = new Array();
         for (const user of users) {
             user_id = user[0];
             user_obj = guild.members.cache.get(user_id);
@@ -125,11 +126,10 @@ const getUsers = (guild, role) => {
                 usersReqd.push(user_id);
             }
         }
-        console.log(usersReqd);
         return usersReqd;
         // role_user -> 2d array with role id and list of names
         // database WORK, update existing users or create new
-    });
-}
+    };
+
 
 exports.getUsers = getUsers;

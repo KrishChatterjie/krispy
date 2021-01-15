@@ -20,15 +20,17 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+// On adding to a new server
 client.on('guildCreate', guild => {
 	
 	console.log(guild.id);
 	console.log(guild.name);
 	updateRolesUsers(guild);
 
-})
+});
 
-client.on('message', message => {
+// On message
+client.on('message', async message => {
 	
 	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
 	return;
@@ -79,8 +81,8 @@ client.on('message', message => {
 		case 'update':
 		case 'refresh':
 			// getInfo.getUsers(message.guild, message.mentions.roles.first());
-			// console.log(getInfo.getUsers(message.guild, message.mentions.roles.first()));
-			console.log(message.content);
+			let x = await getInfo.getUsers(message.guild, message.mentions.roles.first());
+			console.log(x);
 			break;
 
 		case 'remove':
