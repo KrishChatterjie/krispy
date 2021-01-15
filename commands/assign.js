@@ -48,21 +48,15 @@ module.exports = {
 		// console.log(assignerId);
 		// console.log("-----------------");
 		// console.log(taskName);
-		static async addtask (assignees_id,assignerId, taskName) {
+		async function addtask (assignees_id,assignerId, taskName) {
 			try {
-			  const exist = await User.findOne({ where: { discordId: assignees_id } });
-			  if (!exist) {
-				return {
-				  error: true,
-				  message: 'No such user found',
-				  code: 404
-				};
-			  }
+			  const exist = await User.findOne({ where: { discordId: {in:assignees_id} , Serverid: message.guild.id }});
+			  const exist1 = await User.findOne({ where: {discordId: assignerId , Serverid: message.guild.id} });
 			  const taskk = {
 				taskId: uuid4(),
 				taskname: taskName,
-				assignee: exist.userId,
-				assigner: assignerId
+				assignee: exist.UserId,
+				assigner: exist1.UserId
 			  };
 			  const newTask = await task.create(taskk);
 			  return {
@@ -94,6 +88,6 @@ module.exports = {
 
 		})
 
-	},
-};
-©
+	}
+}
+}
