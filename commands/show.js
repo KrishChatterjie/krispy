@@ -1,8 +1,8 @@
 module.exports = {
     name: 'show',
 	aliases: ["showtask", "display", "displaytask"],
-	usage: "@user(optional) [task name]",
-	description: 'Show\'s the tasks',
+	usage: "@role/@user(optional)",
+	description: 'Shows the tasks',
 	execute(message, args) {
 		message.channel.send('Nothing to show as of now but Awesome stuff coming soon!');
 		var user = "";

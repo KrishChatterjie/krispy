@@ -23,13 +23,13 @@ module.exports = {
             }
             const command = commands.get(args[0]);
             
-            data.push(`__**Name:**__ ${command.name}`);
+            data.push(`**Name:** ${command.name}`);
             if (command.description)
-                data.push(`__**Description:**__ ${command.description}`);
+                data.push(`**Description:** ${command.description}`);
             if (command.aliases)
-                data.push(`__**Aliases:**__ ${command.aliases.join(", ")}`);
+                data.push(`**Aliases:** ${command.aliases.join(", ")}`);
             if (command.usage)
-                data.push(`__**Usage:**__ \`~${command.name} ${command.usage}\``);
+                data.push(`**Usage:** \`~${command.name} ${command.usage}\``);
         }
         message.channel.send(data.join("\n"));
 

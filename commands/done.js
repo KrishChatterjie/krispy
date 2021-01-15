@@ -1,7 +1,7 @@
 module.exports = {
     name: 'done',
 	aliases: ["donetask", "finished", "finishedtask"],
-	usage: "[task name]",
+	usage: "[task name] [__%]",
 	description: 'Completes the task',
 	execute(message, args) {
 		message.channel.send('Done... but what?');

@@ -75,31 +75,95 @@ client.on('message', message => {
 		console.log(role_user);
 	});
 
-	//-----------------------------------------------------------------------------------------------------------------------------------
-	if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
-		client.commands.get('ping').execute(message, args);
+	//-----------------------------------------------------------------------------------------------------
+	switch(command){
+
+		case 'ping':
+		case 'check':
+		case 'online':
+		case 'checkonline':
+			client.commands.get('ping').execute(message, args);
+			break;
+
+		case 'help':
+		case 'commands':
+			client.commands.get('help').execute(message, args);
+			break;
+
+		case 'assign':
+		case 'give':
+		case 'givetask':
+		case 'assigntask':
+			client.commands.get('assign').execute(message, args);
+			break;
+
+		case 'show':
+		case 'showtask':
+		case 'display':
+		case 'displaytask':
+			client.commands.get('show').execute(message, args);
+			break;
+
+		case 'done':
+		case 'donetask':
+		case 'finished':
+		case 'finishedtask':
+			client.commands.get('done').execute(message, args);
+			break;
+
+		case 'progress':
+		case 'taskprogress':
+			client.commands.get('progress').execute(message, args);
+			break;
+
+		case 'update':
+		case 'refresh':
+			client.commands.get('update').execute(message, args);
+			break;
+
+		case 'remove':
+		case 'delete':
+			client.commands.get('remove').execute(message, args);
+			break;
+
+
+		case 'server':
+			message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+			break;
+
+		case 'user-info':
+			message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+			break;
+		
+		default:
+			message.channel.send(`What are you sayin' bro?? That's not a command!`);
+			message.channel.send(`Use \`~help\` to know the commands.`);
+			break;
 	}
-	else if (command === 'help'||command === 'commands') {
-		client.commands.get('help').execute(message, args);
-	}
-	else if (command === 'assign'||command === 'give'||command === 'givetask'||command ===  'assigntask') {
-		client.commands.get('assign').execute(message, args);
-	}
-	else if (command === 'show'||command ==='showtask'||command === 'display'||command === 'displaytask') {
-		client.commands.get('show').execute(message, args);
-	}
-	else if (command === 'done'||command=== 'donetask'||command ==='finished'||command ==='finishedtask') {
-		client.commands.get('done').execute(message, args);
-	}
-	else if (command === 'progress'||command === 'taskprogress') {
-		client.commands.get('progress').execute(message, args);
-	}
-	else if (command === 'server') {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-	}
-	else if (command === 'user-info') {
-		message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
-	}
+	// if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
+	// 	client.commands.get('ping').execute(message, args);
+	// }
+	// else if (command === 'help'||command === 'commands') {
+	// 	client.commands.get('help').execute(message, args);
+	// }
+	// else if (command === 'assign'||command === 'give'||command === 'givetask'||command ===  'assigntask') {
+	// 	client.commands.get('assign').execute(message, args);
+	// }
+	// else if (command === 'show'||command ==='showtask'||command === 'display'||command === 'displaytask') {
+	// 	client.commands.get('show').execute(message, args);
+	// }
+	// else if (command === 'done'||command=== 'donetask'||command ==='finished'||command ==='finishedtask') {
+	// 	client.commands.get('done').execute(message, args);
+	// }
+	// else if (command === 'progress'||command === 'taskprogress') {
+	// 	client.commands.get('progress').execute(message, args);
+	// }
+	// else if (command === 'server') {
+	// 	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+	// }
+	// else if (command === 'user-info') {
+	// 	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+	// }
       
 });
 

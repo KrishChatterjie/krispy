@@ -7,7 +7,7 @@ module.exports = {
 		if (message.mentions.users.first() != null) {
 			message.mentions.users
 				.first()
-				.send(args.join(" ") + `\n\n__**Assigned by:**__ @` + message.author.tag, {
+				.send(args.join(" ") + `\n\n**Assigned by:** @` + message.author.tag, {
 					split: true,
 				})
 				.then(() => {
