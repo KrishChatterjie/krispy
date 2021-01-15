@@ -53,45 +53,27 @@ client.on('message', message => {
 	
 	
 	//------------------------------------------Working space------------------------------------------------------------------------
-	
-	// 							console.log(message.guild.roles.fetch());
-  
 
-
-	// let role_users  = new Array();
-
-
-	// for (const role of roles) {
-	// 	id = role[0];
-	// 	console.log(message.guild.roles.fetch(id).members);
-	// }
-
-	let x = new Array();
+	let users = new Array();
 	message.guild.members.fetch().then(members => {
 		members.map(member => {
-			// x.push([member.user.username, member.user.id]);
-			x.push([member.user.username, member.user.id]);
+			users.push([member.user.id, member.user.username]);
 		});
-		console.log(x, 'inside');
-		console.log('----');
+		let role_user = new Array();
+		for (const role of roles) {
+			role_id = role[0];
+			role_user.push([role_id, new Array()]);
+			for (const user of users) {
+				user_id = user[0];
+				user_obj = message.guild.members.cache.get(user_id)
+				if (user_obj.roles.cache.some((role) => role.id == role_id)) {
+					idx = role_user.length - 1;
+					role_user[idx][1].push(user_id);
+				}
+			}
+		}
+		console.log(role_user);
 	});
-	console.log(x, 'outside');
-	
-	// console.log(message.member);
-
-	// message.guild.fetch().then(g => {
-	// 	g.members.fetch().then(m => {
-	// 		console.log(m.user.roles.cache);
-	// 		});
-	// 	});
-
-    // const Members = message.guild.members.cache.map(member => `<@`+ member.user+`> `);
-    // message.channel.send(`XO ${Members}`);
-
-
-	
-	// console.log(message.guild.members.fetch());
-	// console.log(message.guild.members);
 
 	//-----------------------------------------------------------------------------------------------------------------------------------
 	if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
