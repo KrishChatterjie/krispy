@@ -27,11 +27,11 @@ module.exports = {
 
 		let assignerId = message.author.id;
 
-		console.log(assignees_id);
-		console.log("-----------------");
-		console.log(assignerId);
-		console.log("-----------------");
-		console.log(taskName);
+		// console.log(assignees_id);
+		// console.log("-----------------");
+		// console.log(assignerId);
+		// console.log("-----------------");
+		// console.log(taskName);
 
 
 		message.mentions.users.map(user => {

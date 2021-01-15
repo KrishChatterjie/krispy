@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const fs = require('fs');
-
 const Discord = require('discord.js');
 
 const { prefix } = require('./config.json');
@@ -9,35 +8,18 @@ const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 const { Console } = require('console');
 
 const client = new Discord.Client();
-
 client.commands = new Discord.Collection();
-
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
-	
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
-client.on('guildCreate', guild => {
-	
-	console.log(guild.id);
-	console.log(guild.name);
-
-})
-
-client.on('message', message => {
-	
-	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
-	return;
-	
-	const args = message.content.slice(prefix.length).trim().split(' ');
-	const command = args.shift().toLowerCase();
-	
-	let rolemap = message.guild.roles.cache
+const updateRolesUsers = (guild) => {
+	let rolemap = guild.roles.cache
 	.sort((a, b) => b.position - a.position)
 	.map(r => `${r.id},${r.name}`);
 	if (rolemap.length > 1024) rolemap = "To many roles to display";
@@ -49,13 +31,10 @@ client.on('message', message => {
 		roles.push([roleData[0], roleData[1]]);
 	}
 	// roles -> a 2d array with role names and corresponding ids
-	
-	
-	
-	//------------------------------------------Working space------------------------------------------------------------------------
+	// database WORK, update existing users or create new
 
 	let users = new Array();
-	message.guild.members.fetch().then(members => {
+	guild.members.fetch().then(members => {
 		members.map(member => {
 			users.push([member.user.id, member.user.username]);
 		});
@@ -65,15 +44,37 @@ client.on('message', message => {
 			role_user.push([role_id, new Array()]);
 			for (const user of users) {
 				user_id = user[0];
-				user_obj = message.guild.members.cache.get(user_id)
+				user_obj = guild.members.cache.get(user_id)
 				if (user_obj.roles.cache.some((role) => role.id == role_id)) {
 					idx = role_user.length - 1;
 					role_user[idx][1].push(user_id);
 				}
 			}
 		}
-		//console.log(role_user);
+		// role_user -> 2d array with role id and list of names
+		// database WORK, update existing users or create new
 	});
+}
+
+client.on('guildCreate', guild => {
+	
+	console.log(guild.id);
+	console.log(guild.name);
+	updateRolesUsers(guild);
+
+})
+
+client.on('message', message => {
+	
+	if (!message.content.startsWith(prefix) || message.content.startsWith(`${prefix}${prefix}`) || message.author.bot) 
+	return;
+	
+	const args = message.content.slice(prefix.length).trim().split(' ');
+	const command = args.shift().toLowerCase();
+	
+	
+	
+	//------------------------------------------Working space------------------------------------------------------------------------
 
 	//-----------------------------------------------------------------------------------------------------
 	switch(command){
@@ -118,7 +119,7 @@ client.on('message', message => {
 
 		case 'update':
 		case 'refresh':
-			client.commands.get('update').execute(message, args);
+			updateRolesUsers(message.guild);
 			break;
 
 		case 'remove':
@@ -140,38 +141,11 @@ client.on('message', message => {
 			message.channel.send(`Use \`~help\` to know the commands.`);
 			break;
 	}
-	// if (command === 'ping'||command === 'check'||command ===  'online'||command === 'checkonline') {
-	// 	client.commands.get('ping').execute(message, args);
-	// }
-	// else if (command === 'help'||command === 'commands') {
-	// 	client.commands.get('help').execute(message, args);
-	// }
-	// else if (command === 'assign'||command === 'give'||command === 'givetask'||command ===  'assigntask') {
-	// 	client.commands.get('assign').execute(message, args);
-	// }
-	// else if (command === 'show'||command ==='showtask'||command === 'display'||command === 'displaytask') {
-	// 	client.commands.get('show').execute(message, args);
-	// }
-	// else if (command === 'done'||command=== 'donetask'||command ==='finished'||command ==='finishedtask') {
-	// 	client.commands.get('done').execute(message, args);
-	// }
-	// else if (command === 'progress'||command === 'taskprogress') {
-	// 	client.commands.get('progress').execute(message, args);
-	// }
-	// else if (command === 'server') {
-	// 	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-	// }
-	// else if (command === 'user-info') {
-	// 	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
-	// }
       
 });
 
 client.login(process.env.TOKEN);
 
-client.once('ready', readyDiscord);
-
-function readyDiscord() {
+client.once('ready', () => {
 	console.log('Logged in');	
-	
-}
+});
