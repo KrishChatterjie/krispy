@@ -2,5 +2,25 @@
   "dependencies": {
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0"
-  }
+  },
+  "name": "krispy",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+    "devstart": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",a
+    "url": "git+https://github.com/KrishChatterjie/krispy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrishChatterjie/krispy/issues"
+  },
+  "homepage": "https://github.com/KrishChatterjie/krispy#readme"
 }
