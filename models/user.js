@@ -8,7 +8,7 @@ const schema = {
   },
   discordId :{
     type: sequelize.STRING(255),
-    primaryKey= true
+    primaryKey: true
   },
   UserName: {
     type: sequelize.STRING(255),
