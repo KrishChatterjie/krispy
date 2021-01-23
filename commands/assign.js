@@ -3,6 +3,7 @@ const server = require('../models/server');
 const task= require('../models/task');
 const user = require('../models/user');
 const uuid4 = require('uuid4');
+const getInfo = require('./getrolesusers.js');
 
 
 module.exports = {
@@ -27,6 +28,16 @@ module.exports = {
 			let user_copy = user.slice();
 			assignees_id.push(user_copy.shift());
 		}
+
+		//working
+		let roles = message.mentions.roles;
+		async function asyncFunction() {
+			for (const role of roles) {
+				let x = await getInfo.getUsers(message.guild, role);
+				message.channel.send(x);
+			}
+		}
+		//
 
 		let taskName = "";
 		let lenArgs = args.length;
