@@ -1,12 +1,11 @@
-const Sequelize = require('sequelize');
-const dotEnv = require('dotenv');
+const Sequelize = require('sequelize')
+const dotEnv = require('dotenv')
 
-dotEnv.config();
-
+dotEnv.config()
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   logging: false
-});
+})
 
-module.exports = sequelize;
+module.exports = sequelize
