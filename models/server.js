@@ -1,6 +1,5 @@
-const sequelize = require('sequelize');
-const db = require('../database/connection');
-const logger = require('../logging/logger');
+const sequelize = require('sequelize')
+const db = require('../database/connection')
 
 const schema = {
   Serverid: {
@@ -11,19 +10,19 @@ const schema = {
     type: sequelize.STRING(255),
     allowNull: false
   }
-};
+}
 
 const options = {
-  timestamps: false
-};
-const server = db.define('server', schema, options);
+  timestamps: true
+}
+const server = db.define('server', schema, options)
 
 server.sync({ alter: true })
   .then(() => {
-    logger.info('server Migration Made');
+    console.log('server Migration Made')
   })
   .catch(err => {
-    logger.error('An Error Occurred:' + err);
-  });
+    console.log('An Error Occurred:' + err)
+  })
 
-module.exports = server;
+module.exports = server
