@@ -1,6 +1,5 @@
-const sequelize = require('sequelize');
-const db = require('../database/connection');
-const logger = require('../logging/logger');
+const sequelize = require('sequelize')
+const db = require('../database/connection')
 
 const schema = {
   taskId: {
@@ -12,39 +11,32 @@ const schema = {
     allowNull: false
   },
   assigned_by: {
-    type: sequelize.STRING(255),
+    type: sequelize.UUID,
     allowNull: false,
     references: {
-      model: 'user',
-      key: 'UserId'
-    }
-},
-  assigned_to: {
-    type: sequelize.STRING(255),
-    allowNull: false,
-    references: {
-      model: 'user',
+      model: 'users',
       key: 'UserId'
     }
   },
+
   task_status: {
     type: sequelize.INTEGER,
-    allowNull: true,
+    allowNull: false,
     defaultValue: 0
   }
-};
+}
 
 const options = {
-  timestamps: false
-};
-const task = db.define('task', schema, options);
+  timestamps: true
+}
+const task = db.define('task', schema, options)
 
-Poll.sync({ alter: true })
+task.sync({ alter: true })
   .then(() => {
-    logger.info('task Migration Made');
+    console.log('task Migration Made')
   })
   .catch(err => {
-    logger.error('An Error Occurred:' + err);
-  });
+    console.log('An Error Occurred:' + err)
+  })
 
-module.exports = task;
+module.exports = task
