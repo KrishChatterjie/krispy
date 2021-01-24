@@ -1,14 +1,14 @@
-const sequelize = require('sequelize');
-const db = require('../database/connection');
-const logger = require('../logging/logger');
+
+const sequelize = require('sequelize')
+const db = require('../database/connection')
 
 const schema = {
   UserId: {
     type: sequelize.UUID,
-  },
-  discordId :{
-    type: sequelize.STRING(255),
     primaryKey: true
+  },
+  discordId: {
+    type: sequelize.STRING(255)
   },
   UserName: {
     type: sequelize.STRING(255),
@@ -18,22 +18,22 @@ const schema = {
     type: sequelize.STRING(255),
     allowNull: false,
     references: {
-      model: 'server',
+      model: 'servers',
       key: 'Serverid'
     }
   }
-};
+}
 const options = {
-  timestamps: false
-};
-const user = db.define('user', schema, options);
+  timestamps: true
+}
+const user = db.define('user', schema, options)
 
-Poll.sync({ alter: true })
+user.sync({ alter: true })
   .then(() => {
-    logger.info('user Migration Made');
+    console.log('user Migration Made')
   })
   .catch(err => {
-    logger.error('An Error Occurred:' + err);
-  });
+    console.log('An Error Occurred:' + err)
+  })
 
-module.exports = user;
+module.exports = user
