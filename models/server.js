@@ -2,7 +2,7 @@ const sequelize = require('sequelize')
 const db = require('../database/connection')
 
 const schema = {
-  Serverid: {
+  ServerId: {
     type: sequelize.STRING(255),
     primaryKey: true
   },
