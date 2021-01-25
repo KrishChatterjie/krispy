@@ -78,8 +78,10 @@ module.exports = {
       }
     }
 
+    addtask(assignees_id, message.author.id, taskName)
+    
     message.mentions.users.map(user => {
-      user.send('**Task:**' + taskName + '\n**Assigned by:** <@' + message.author + '>', {
+      user.send('**Task:** ' + taskName + '\n**Assigned by:** <@' + message.author + '>', {
         split: true
       })
         .then(() => {
