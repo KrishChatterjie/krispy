@@ -1,0 +1,34 @@
+{
+    "servers": [{
+            "server_id": 123091283,
+            "users": [{
+                    "name": "John Doe",
+                    "id": 123021840,
+                    "tasks": [
+                        {
+                            "taskName": "This task",
+                            "assigner_id": 1321,
+                            "progress": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "John Foe",
+                    "id": 12302184011
+                }
+            ]
+        },
+        {
+            "server_id": 99,
+            "users": [{
+                    "name": "John Doe",
+                    "id": 123021840
+                },
+                {
+                    "name": "Gaa Foe",
+                    "id": 12302184011
+                }
+            ]
+        }
+    ]
+}
