@@ -1,4 +1,3 @@
-
 const sequelize = require('sequelize')
 const db = require('../database/connection')
 
@@ -14,7 +13,7 @@ const schema = {
     type: sequelize.STRING(255),
     allowNull: false
   },
-  Serverid: {
+  ServerId: {
     type: sequelize.STRING(255),
     allowNull: false,
     references: {
