@@ -9,12 +9,12 @@ module.exports = {
   aliases: ['give', 'givetask', 'assigntask'],
   usage: '@role/@user [task name]',
   description: 'Assigns task to role/user',
-  execute (message, args) {
+  async execute (message, args) {
     // if role is mentioned, get a list of all users with that role from the database store it as an array
     // the elements in the array will be converted to the users object
     // if user is mentioned after that, append that user to the existing array we get from db
     // repeat the code below for all the users
-
+console.log('hello')
     const users = message.mentions.users
 
     const assignees_id = new Array()
@@ -47,15 +47,15 @@ module.exports = {
 
     const assignerId = message.author.id
 
-    // console.log(assignees_id);
-    // console.log("-----------------");
-    // console.log(assignerId);
-    // console.log("-----------------");
-    // console.log(taskName);
+    console.log(assignees_id);
+    console.log("-----------------");
+    console.log(assignerId);
+    console.log("-----------------");
+    console.log(taskName);
     async function addtask (assignees_id, assignerId, taskName) {
       try {
-			  const exist = await User.findOne({ where: { discordId: { in: assignees_id }, Serverid: message.guild.id } })
-			  const exist1 = await User.findOne({ where: { discordId: assignerId, Serverid: message.guild.id } })
+			  const exist = await user.findOne({ where: { discordId:  assignees_id , ServerId: message.guild.id } })
+			  const exist1 = await user.findOne({ where: { discordId: assignerId, ServerId: message.guild.id } })
 			  const taskk = {
           taskId: uuid4(),
           taskname: taskName,
@@ -78,7 +78,9 @@ module.exports = {
       }
     }
 
-    addtask(assignees_id, message.author.id, taskName)
+     const a= await addtask(assignees_id, message.author.id, taskName)
+     console.log(a)
+    
     
     message.mentions.users.map(user => {
       user.send('**Task:** ' + taskName + '\n**Assigned by:** <@' + message.author + '>', {
